@@ -21,19 +21,30 @@ public class HanbitSchool {
 				int eng = scanner.nextInt();
 				System.out.println("수학 점수");
 				int math = scanner.nextInt();
-				System.out.println(scanner.getClass());
+				System.out.println(service.input(hak, name, kor,eng, math));
 				break;
 			case 2:
+				System.out.println(service.getList());
 				break;
 			case 3:
+				System.out.println("학번 :");
+				hak = scanner.next();
+				System.out.println(service.searchByHak(hak));
 				break;
 			case 4:
+				System.out.println("이름 :");
+				name = scanner.next();
+				System.out.println(service.searchByName(name));
 				break;
 			case 5:
+				System.out.println(service.descGradeByTotal());
 				break;
 			case 6:
+				System.out.println(service.ascGradeByName());
 				break;
 			case 7:
+				System.out.println("==============종료=========");
+				
 				break;
 			default:break;
 			}

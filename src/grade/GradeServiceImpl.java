@@ -1,11 +1,16 @@
 package grade;
 
 import java.util.Collections;
-import java.util.Vector;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.ArrayList;
+
+
 
 public class GradeServiceImpl implements GradeService {
-	Vector<Grade> vec = new Vector<Grade>();
-	DescTotal dSort
+	ArrayList<Grade> vec = new ArrayList<Grade>();
+	AscName aSort = new AscName();
+	DescTotal dSort = new DescTotal();
 	
 	/*
 	 * 학생을 성적부에 등록하기 힌트 ) 벡터 메소드 중에 한 객체만 넣는 메소드를 사용하세요 = 연산자는 안됨.
@@ -14,7 +19,7 @@ public class GradeServiceImpl implements GradeService {
 	 */
 	
 	@Override
-	public void input(String hak, String name, int kor, int eng, int math) {
+	public Grade input(String hak, String name, int kor, int eng, int math) {
 		Grade grade = new Grade();
 		grade.setHak(hak);
 		grade.setName(name);
@@ -23,7 +28,9 @@ public class GradeServiceImpl implements GradeService {
 		grade.setMath(math);
 		vec.add(grade);
 		
+		return grade;
 	}
+	
 	/**
 	 * 성적부에 등록된 전체 학생 리스트 출력
 	 * 힌트) 필드에 있는 객체에 모든 학생 리스트가 있을 것이다.
@@ -31,7 +38,7 @@ public class GradeServiceImpl implements GradeService {
 	 */
 
 	@Override
-	public Vector<Grade> getList() {
+	public ArrayList<Grade> getList() {
 		
 		return vec;
 	}
@@ -41,15 +48,13 @@ public class GradeServiceImpl implements GradeService {
 
 	@Override
 	public Grade searchByHak(String hak) {
-		Grade grade = new Grade();
+		Grade grade = new Grade(); 
 		for (int i = 0; i < vec.size(); i++) { //1000대신에 백터의 length를 구하는 메소드 찾아볼것
-			if (vec.elementAt(i).getHak().equals(hak)) {
-				grade = vec.elementAt(i);
+			if (vec.get(i).getHak().equals(hak)) {
+				grade = vec.get(i);
 				
-			} else {
-				grade = null;
-
-			}
+				
+			} 
 		}
 		return grade;
 	}
@@ -58,11 +63,12 @@ public class GradeServiceImpl implements GradeService {
 	 */
 
 	@Override
-	public Vector<Grade> searchByName(String name) {
-		Vector<Grade> temp = new Vector<Grade>();
+	public ArrayList<Grade> searchByName(String name) {
+		ArrayList<Grade> temp = new ArrayList<Grade>();
 		for (int i = 0; i < vec.size(); i++) {
-			if (vec.elementAt(i).getName().equals(name)) {
-				temp.add(vec.elementAt(i));
+			if (vec.get(i).getName().equals(name)) {
+				temp.add(vec.get(i));
+				
 				
 			}
 			
@@ -71,13 +77,15 @@ public class GradeServiceImpl implements GradeService {
 	}
 
 	@Override
-	public void descGradeByTotal() {
+	public ArrayList<Grade> descGradeByTotal() {
 		Collections.sort(vec,dSort);
-		
+		return vec;
+	
 	}
 	@Override
-	public void ascGradeByName() {
-		Collections.sort(vec,dSort);
+	public ArrayList<Grade> ascGradeByName() {
+		Collections.sort(vec,aSort);
+		return vec;
 		
 		
 	}

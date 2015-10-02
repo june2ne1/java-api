@@ -42,9 +42,9 @@ public class Grade {
 	}
 
 	public int getTotal(){
-		int total = 0;
-		//로직완성
-		return total;
+		
+	 
+		return kor+eng+math;
 	}
 	@Override
 	public String toString() {
