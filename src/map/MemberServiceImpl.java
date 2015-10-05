@@ -3,6 +3,7 @@ package map;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class MemberServiceImpl implements MemberService {
 	Map<String,Object> map = new HashMap<String,Object>();
 	Member member = new Member();
@@ -24,6 +25,9 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public String login(String id, String pass) {
+		System.out.println(id+"입장");
+		System.out.println(pass+"비번");
+				
 		String result = "";
 		
 		
@@ -54,14 +58,58 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int count() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return map.size();
 	}
 
 	@Override
 	public Member searchById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		/*
+		Member temp = (Member)map.get(id);
+		Member result = null;
+		if (id.equals(temp.getId())) {
+			result = temp;
+			
+		}
+		return result;
+		*/
+		return (Member)map.get(id);
 	}
+
+	
+
+	@Override
+	public String changePass(String id,String pass) {
+		String result = "";
+		Member taget =  (Member)map.get(id);
+		if (taget != null) {
+			taget.setPass(pass);
+			result = "비밀번호가 변경되었습니다.";
+			
+		} else {
+			result = "비밀번호가 변경되지 않았습니다.";
+
+		}
+		return result;
+	}
+
+
+	@Override
+	public String remove(String id) {
+		String result = null;
+		Object m = map.remove(id);
+		if (m != null) {
+			
+			result = "입력하신 ID"+id+"가 삭제되었습니다";
+			
+		} else {
+			result ="삭제하려는 ID가 없습니다. 다시 입력하세요";
+
+		}
+		return result;
+	}
+	
+
+	
 
 }

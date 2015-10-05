@@ -10,7 +10,10 @@ public interface MemberService {
 	public int count();
 	//아이디 덤색
 	public Member searchById(String id);
+	//비번변경
+	public String changePass(String id,String pass);
 	
+	public String remove(String id);
 	
 
 }
